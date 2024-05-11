@@ -20,6 +20,7 @@ class _CalculatePageState extends State<CalculatePage> {
   String formattedPrice = '';
   String formattedRebate = '';
   String formattedPriceAfterRebate = '';
+  BillDetails? billDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +31,14 @@ class _CalculatePageState extends State<CalculatePage> {
         final int unitsUsed = int.parse(_unitsController.text);
         final double rebatePercentage = double.parse(_rebateController.text) /
             100; // Convert percentage input to a decimal
-        final BillDetails billDetails =
-            BillCalculation.calculateElectricityBill(
-                unitsUsed, rebatePercentage);
+        billDetails = BillCalculation.calculateElectricityBill(
+            unitsUsed, rebatePercentage);
 
         setState(() {
-          formattedPrice = 'RM${billDetails.price.toStringAsFixed(2)}';
-          formattedRebate = '-RM${billDetails.rebate.toStringAsFixed(2)}';
+          formattedPrice = 'RM${billDetails?.price.toStringAsFixed(2)}';
+          formattedRebate = '-RM${billDetails?.rebate.toStringAsFixed(2)}';
           formattedPriceAfterRebate =
-              'RM${billDetails.priceAfterRebate.toStringAsFixed(2)}';
+              'RM${billDetails?.priceAfterRebate.toStringAsFixed(2)}';
           showResultCard = true;
         });
       } catch (e) {
@@ -123,7 +123,7 @@ class _CalculatePageState extends State<CalculatePage> {
           ),
         ),
         const SizedBox(height: 20),
-        if (showResultCard == true)
+        if (showResultCard == true && billDetails != null)
           ShadCard(
             width: 380,
             title: const Text('Result'),
@@ -143,7 +143,7 @@ class _CalculatePageState extends State<CalculatePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text('Rebate:'),
-                      Text(formattedRebate),
+                      Text(billDetails?.rebate != 0 ? formattedRebate : '-'),
                     ],
                   ),
                   const SizedBox(height: 8),
