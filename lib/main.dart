@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:watts_my_bill/pages/about_screen.dart';
 import 'package:watts_my_bill/pages/home_screen.dart';
+import 'package:watts_my_bill/utils/constants.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +16,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Watt\'s My Bill',
       theme: _buildAppTheme(),
-      home: const HomePage(),
+      initialRoute: Routes.home,
+      routes: {
+        Routes.home: (context) => const HomePage(),
+        Routes.about: (context) => const AboutPage(),
+      },
     );
   }
 
