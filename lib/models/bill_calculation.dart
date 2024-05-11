@@ -15,9 +15,13 @@ class BillCalculation {
   /// Returns the final bill amount in RM after applying the rebate.
   static double calculateElectricityBill(
       int unitsUsed, double rebatePercentage) {
-    if (unitsUsed < 0 || rebatePercentage < 0) {
-      throw ArgumentError(
-          'Units used and rebate percentage must not be negative.');
+    if (unitsUsed < 0) {
+      throw ArgumentError('Units used must not be negative.');
+    }
+
+    // Validate rebate percentage is within the allowed range (0% to 5%)
+    if (rebatePercentage < 0.0 || rebatePercentage > 0.05) {
+      throw ArgumentError('Rebate percentage must be between 0% and 5%.');
     }
 
     double bill = 0.0;
