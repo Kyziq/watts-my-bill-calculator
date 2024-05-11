@@ -1,41 +1,78 @@
+import 'package:watts_my_bill/common/app_bar.dart';
+import 'package:watts_my_bill/pages/about.dart';
+import 'package:watts_my_bill/pages/calculate.dart';
 import 'package:flutter/material.dart';
-import 'package:watts_my_bill/pages/about_screen.dart';
-import 'package:watts_my_bill/pages/home_screen.dart';
-import 'package:watts_my_bill/utils/constants.dart';
+import 'package:flutter_solidart/flutter_solidart.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const App());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+// Maps the routes to the specific widget page.
+const String homeRoute = '/';
+const String calculateRoute = '/calculate';
+const String aboutRoute = '/about';
+final routes = <String, WidgetBuilder>{
+  homeRoute: (_) => const MainPage(),
+  calculateRoute: (_) => const CalculatePage(),
+  '/aboutRoute': (_) => const AboutPage()
+};
+
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Watt\'s My Bill',
-      theme: _buildAppTheme(),
-      initialRoute: Routes.home,
-      routes: {
-        Routes.home: (context) => const HomePage(),
-        Routes.about: (context) => const AboutPage(),
+    return Solid(
+      providers: [
+        Provider<Signal<ThemeMode>>(create: () => Signal(ThemeMode.light)),
+      ],
+      builder: (context) {
+        final themeMode = context.observe<ThemeMode>();
+        return ShadApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeMode,
+          routes: routes,
+          theme: ShadThemeData(
+            brightness: Brightness.light,
+            colorScheme: const ShadZincColorScheme.light(),
+          ),
+          darkTheme: ShadThemeData(
+            brightness: Brightness.dark,
+            colorScheme: const ShadZincColorScheme.dark(),
+          ),
+        );
       },
     );
   }
+}
 
-  ThemeData _buildAppTheme() {
-    return ThemeData(
-      useMaterial3: true,
-      fontFamily: 'Avenir Next',
-      textTheme: const TextTheme(
-        headlineLarge:
-            TextStyle(fontFamily: 'Avenir Next', fontWeight: FontWeight.bold),
-        bodyLarge:
-            TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.normal),
-        bodyMedium: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500),
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const MyAppBar(
+        titleWidget: Text('Watt\'s My Bill?'),
       ),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
+      body: Center(
+        child: ShadButton(
+          onPressed: () => Navigator.pushNamed(context, calculateRoute),
+          text: const Text('Calculate'),
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
