@@ -1,4 +1,4 @@
-package com.example.watts_my_bill
+package com.haziq.watts_my_bill
 
 import io.flutter.embedding.android.FlutterActivity
 
