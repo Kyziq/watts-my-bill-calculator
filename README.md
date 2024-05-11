@@ -1,3 +1,3 @@
-# watts_my_bill
+# Watt's My Bill
 
 A new Flutter project.
