@@ -1,10 +1,24 @@
-/// A utility class for calculating electricity bills based on tiered rates and rebates.
+class BillDetails {
+  final double price;
+  final double rebate;
+  final double priceAfterRebate;
+
+  BillDetails(
+      {required this.price,
+      required this.rebate,
+      required this.priceAfterRebate});
+}
+
 class BillCalculation {
   // Defined in sen per kWh for different blocks of usage
-  static const double _rateForFirst200kWh = 21.8; // Rate for the first 200 kWh
-  static const double _rateForNext100kWh = 33.4; // Rate for 201 to 300 kWh
-  static const double _rateForNext300kWh = 51.6; // Rate for 301 to 600 kWh
-  static const double _rateBeyond600kWh = 54.6;
+  static const double _firstBlock =
+      21.8; // For the first 200 kWh (1 - 200 kWh) per month
+  static const double _secondBlock =
+      33.4; // For the next 100 kWh (201 - 300 kWh) per month
+  static const double _thirdBlock =
+      51.6; // For the next 300 kWh (301 - 600 kWh) per month
+  static const double _fourthBlock =
+      54.6; // For the next 300 kWh (601 - 900 kWh) per month onwards
 
   BillCalculation(double units, double rebate); // Rate for 601 kWh onwards
 
@@ -13,7 +27,7 @@ class BillCalculation {
   /// [unitsUsed] specifies the total number of electricity units (kWh) used.
   /// [rebatePercentage] is the percentage rebate applied to the total bill.
   /// Returns the final bill amount in RM after applying the rebate.
-  static double calculateElectricityBill(
+  static BillDetails calculateElectricityBill(
       int unitsUsed, double rebatePercentage) {
     if (unitsUsed < 0) {
       throw ArgumentError('Units used must not be negative.');
@@ -28,21 +42,24 @@ class BillCalculation {
 
     // Calculation
     if (unitsUsed > 600) {
-      bill += (unitsUsed - 600) * _rateBeyond600kWh;
+      bill += (unitsUsed - 600) * _fourthBlock;
       unitsUsed = 600;
     }
     if (unitsUsed > 300) {
-      bill += (unitsUsed - 300) * _rateForNext300kWh;
+      bill += (unitsUsed - 300) * _thirdBlock;
       unitsUsed = 300;
     }
     if (unitsUsed > 200) {
-      bill += (unitsUsed - 200) * _rateForNext100kWh;
+      bill += (unitsUsed - 200) * _secondBlock;
       unitsUsed = 200;
     }
-    bill += unitsUsed * _rateForFirst200kWh;
+    bill += unitsUsed * _firstBlock;
 
-    double totalBill = bill / 100; // Convert sen to RM
-    double discount = totalBill * rebatePercentage;
-    return totalBill - discount;
+    double price = bill / 100; // Convert sen to RM
+    double rebate = price * rebatePercentage;
+    double priceAfterRebate = price - rebate;
+
+    return BillDetails(
+        price: price, rebate: rebate, priceAfterRebate: priceAfterRebate);
   }
 }
