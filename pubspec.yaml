@@ -9,37 +9,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  flutter_svg: ^2.0.10+1
   shadcn_ui: ^0.4.5
+  flutter_solidart: ^1.7.1
+  awesome_flutter_extensions: ^1.2.0
+  multi_split_view: ^2.4.0
+  google_fonts: 6.2.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
   flutter_lints: ^4.0.0
+  solidart_lint: ^1.1.1
+  custom_lint: ^0.6.4
 
 flutter:
   uses-material-design: true
-
   assets:
+    - assets/
     - assets/icons/
-
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Inter-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Inter-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Inter-Bold.ttf
-          weight: 700
-    - family: Avenir Next
-      fonts:
-        - asset: assets/fonts/AvenirNext-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/AvenirNext-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/AvenirNext-DemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/AvenirNext-Bold.ttf
-          weight: 700
