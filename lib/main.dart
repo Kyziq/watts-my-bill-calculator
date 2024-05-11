@@ -16,7 +16,7 @@ const String aboutRoute = '/about';
 final routes = <String, WidgetBuilder>{
   homeRoute: (_) => const MainPage(),
   calculateRoute: (_) => const CalculatePage(),
-  '/aboutRoute': (_) => const AboutPage()
+  aboutRoute: (_) => const AboutPage()
 };
 
 class App extends StatelessWidget {
