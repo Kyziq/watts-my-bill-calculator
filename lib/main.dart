@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watts_my_bill/pages/home_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,12 +11,25 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'AvenirNext'),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+      debugShowCheckedModeBanner: false,
+      title: 'Watt\'s My Bill',
+      theme: _buildAppTheme(),
+      home: const HomePage(),
+    );
+  }
+
+  ThemeData _buildAppTheme() {
+    return ThemeData(
+      useMaterial3: true,
+      fontFamily: 'Avenir Next',
+      textTheme: const TextTheme(
+        headlineLarge:
+            TextStyle(fontFamily: 'Avenir Next', fontWeight: FontWeight.bold),
+        bodyLarge:
+            TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.normal),
+        bodyMedium: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500),
       ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
 }
