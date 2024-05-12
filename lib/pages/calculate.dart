@@ -1,10 +1,10 @@
 import 'package:watts_my_bill/common/assets.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
+import 'package:watts_my_bill/models/bill_calculation.dart';
+import 'package:watts_my_bill/widgets/error_handling.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:watts_my_bill/models/bill_calculation.dart';
-import 'package:toastification/toastification.dart';
 
 class CalculatePage extends StatefulWidget {
   const CalculatePage({super.key});
@@ -20,45 +20,22 @@ class _CalculatePageState extends State<CalculatePage> {
   bool showResultCard = false;
   String formattedPrice = '';
   String formattedRebate = '';
-  String formattedPriceAfterRebate = '';
+  String formattedNetTotal = '';
   BillDetails? billDetails;
 
   void calculateBill() {
     try {
-      final int unitsUsed = int.parse(_unitsController.text);
-      final double rebatePercentage = double.parse(_rebateController.text) /
-          100; // Convert percentage input to a decimal
-      billDetails =
-          BillCalculation.calculateElectricityBill(unitsUsed, rebatePercentage);
+      BillDetails billDetails = BillCalculation.calculateBill(
+          _unitsController.text, _rebateController.text);
 
       setState(() {
-        formattedPrice = 'RM${billDetails?.price.toStringAsFixed(2)}';
-        formattedRebate = '-RM${billDetails?.rebate.toStringAsFixed(2)}';
-        formattedPriceAfterRebate =
-            'RM${billDetails?.priceAfterRebate.toStringAsFixed(2)}';
+        formattedPrice = 'RM${billDetails.price.toStringAsFixed(2)}';
+        formattedRebate = '-RM${billDetails.rebate.toStringAsFixed(2)}';
+        formattedNetTotal = 'RM${billDetails.netTotal.toStringAsFixed(2)}';
         showResultCard = true;
       });
-    } catch (e) {
-      String errorMessage = e is FormatException
-          ? 'Please enter valid numbers.'
-          : (e is ArgumentError ? e.message : 'An unexpected error occurred.');
-
-      toastification.show(
-        context: context,
-        type: ToastificationType.error,
-        style: ToastificationStyle.fillColored,
-        autoCloseDuration: const Duration(seconds: 3),
-        title: const Text('Error!'),
-        description: Text(errorMessage.toString()),
-        alignment: Alignment.bottomCenter,
-        animationDuration: const Duration(milliseconds: 300),
-        borderRadius: BorderRadius.circular(12.0),
-        showProgressBar: true,
-        closeButtonShowType: CloseButtonShowType.onHover,
-        closeOnClick: true,
-        dragToClose: true,
-      );
-
+    } on FormatException catch (e) {
+      ErrorHandler.showError(context, e.message);
       setState(() {
         showResultCard = false;
       });
@@ -78,7 +55,8 @@ class _CalculatePageState extends State<CalculatePage> {
   }
 
   Widget _buildCalculationForm(BuildContext context) {
-    final theme = ShadTheme.of(context);
+    // TODO: Make use of ShadTheme
+    // final theme = ShadTheme.of(context);
 
     return ShadCard(
       width: 350,
@@ -143,7 +121,8 @@ class _CalculatePageState extends State<CalculatePage> {
   }
 
   Widget _buildResultCard() {
-    if (!showResultCard || billDetails == null) return const SizedBox.shrink();
+    // If the result card is not to be shown, return an empty widget
+    if (!showResultCard) return const SizedBox.shrink();
 
     return ShadCard(
       width: 380,
@@ -173,7 +152,7 @@ class _CalculatePageState extends State<CalculatePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Price after Rebate:'),
-                Text(formattedPriceAfterRebate),
+                Text(formattedNetTotal),
               ],
             ),
           ],

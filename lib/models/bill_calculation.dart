@@ -1,12 +1,10 @@
 class BillDetails {
   final double price;
   final double rebate;
-  final double priceAfterRebate;
+  final double netTotal;
 
   BillDetails(
-      {required this.price,
-      required this.rebate,
-      required this.priceAfterRebate});
+      {required this.price, required this.rebate, required this.netTotal});
 }
 
 class BillCalculation {
@@ -20,22 +18,38 @@ class BillCalculation {
   static const double _fourthBlock =
       54.6; // For the next 300 kWh (601 - 900 kWh) per month onwards
 
-  BillCalculation(double units, double rebate); // Rate for 601 kWh onwards
+  static BillDetails calculateBill(String unitsText, String rebateText) {
+    if (unitsText.isEmpty) {
+      throw const FormatException('Please enter the number of units used.');
+    }
+
+    final int units = int.tryParse(unitsText) ?? -1;
+    if (units < 0) {
+      throw const FormatException('Invalid number of units.');
+    }
+
+    double rebateRate = 0.0;
+    if (rebateText.isNotEmpty) {
+      final double parsedRebate = double.tryParse(rebateText) ?? -1.0;
+      rebateRate = parsedRebate / 100;
+      if (rebateRate < 0.0 || rebateRate > 0.05) {
+        throw const FormatException('Rebate must be between 0% and 5%.');
+      }
+    }
+
+    return _performCalculation(units, rebateRate);
+  }
 
   /// Calculates the total electricity bill based on the units consumed and rebate percentage.
-  ///
-  /// [unitsUsed] specifies the total number of electricity units (kWh) used.
-  /// [rebatePercentage] is the percentage rebate applied to the total bill.
-  /// Returns the final bill amount in RM after applying the rebate.
-  static BillDetails calculateElectricityBill(
-      int unitsUsed, double rebatePercentage) {
+  static BillDetails _performCalculation(int unitsUsed, double rebatePercent) {
     if (unitsUsed < 0) {
-      throw ArgumentError('Units used must not be negative.');
+      throw const FormatException('Units used must not be negative.');
     }
 
     // Validate rebate percentage is within the allowed range (0% to 5%)
-    if (rebatePercentage < 0.0 || rebatePercentage > 0.05) {
-      throw ArgumentError('Rebate percentage must be between 0% and 5%.');
+    if (rebatePercent < 0.0 || rebatePercent > 0.05) {
+      throw const FormatException(
+          'Rebate percentage must be between 0% and 5%.');
     }
 
     double bill = 0.0;
@@ -56,10 +70,9 @@ class BillCalculation {
     bill += unitsUsed * _firstBlock;
 
     double price = bill / 100; // Convert sen to RM
-    double rebate = price * rebatePercentage;
-    double priceAfterRebate = price - rebate;
+    double rebate = price * rebatePercent;
+    double netTotal = price - rebate;
 
-    return BillDetails(
-        price: price, rebate: rebate, priceAfterRebate: priceAfterRebate);
+    return BillDetails(price: price, rebate: rebate, netTotal: netTotal);
   }
 }
