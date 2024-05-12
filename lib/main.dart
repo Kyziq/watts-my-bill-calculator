@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(
-        titleWidget: Text('Watt\'s My Bill?'),
+        titleWidget: Text('Watt\'s My Bill'),
       ),
       body: Center(
         child: ShadButton(
