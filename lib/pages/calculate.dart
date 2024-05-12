@@ -31,7 +31,9 @@ class _CalculatePageState extends State<CalculatePage> {
 
       setState(() {
         formattedPrice = 'RM${billDetails.price.toStringAsFixed(2)}';
-        formattedRebate = '-RM${billDetails.rebate.toStringAsFixed(2)}';
+        formattedRebate = billDetails.rebate == 0.00
+            ? '-'
+            : '-RM${billDetails.rebate.toStringAsFixed(2)}';
         formattedNetTotal = 'RM${billDetails.netTotal.toStringAsFixed(2)}';
         showResultCard = true;
       });
@@ -144,7 +146,7 @@ class _CalculatePageState extends State<CalculatePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Rebate:'),
-                Text(billDetails?.rebate != 0 ? formattedRebate : '-'),
+                Text(formattedRebate),
               ],
             ),
             const SizedBox(height: 8),
