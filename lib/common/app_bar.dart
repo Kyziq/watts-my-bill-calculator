@@ -6,11 +6,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.titleWidget,
+    this.showThemeToggle = true,
   }) : assert((title != null) ^ (titleWidget != null),
             'Must provide either title or titleWidget');
 
   final String? title;
   final Widget? titleWidget;
+  final bool showThemeToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,27 +20,29 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleWidget ?? Text(title!),
       centerTitle: true,
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: IconButton(
-            onPressed: () {
-              context.update<ThemeMode>(
-                (value) =>
-                    value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
-              );
-            },
-            icon: SignalBuilder(
-              signal: context.get<Signal<ThemeMode>>(),
-              builder: (context, themeMode, child) {
-                return Icon(
-                  themeMode == ThemeMode.light
-                      ? Icons.light_mode
-                      : Icons.dark_mode,
+        if (showThemeToggle)
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              onPressed: () {
+                context.update<ThemeMode>(
+                  (value) => value == ThemeMode.light
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
                 );
               },
+              icon: SignalBuilder(
+                signal: context.get<Signal<ThemeMode>>(),
+                builder: (context, themeMode, child) {
+                  return Icon(
+                    themeMode == ThemeMode.light
+                        ? Icons.light_mode
+                        : Icons.dark_mode,
+                  );
+                },
+              ),
             ),
           ),
-        ),
       ],
     );
   }

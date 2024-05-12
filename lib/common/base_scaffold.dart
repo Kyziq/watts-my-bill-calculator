@@ -9,6 +9,7 @@ class BaseScaffold extends StatelessWidget {
     required this.children,
     required this.appBarTitle,
     this.editable,
+    this.showThemeToggle = false,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.wrapChildrenInScrollable = true,
     this.wrapSingleChildInColumn = true,
@@ -17,6 +18,7 @@ class BaseScaffold extends StatelessWidget {
   final List<Widget> children;
   final String appBarTitle;
   final List<Widget>? editable;
+  final bool showThemeToggle;
   final CrossAxisAlignment crossAxisAlignment;
   final bool wrapChildrenInScrollable;
   final bool wrapSingleChildInColumn;
@@ -54,7 +56,7 @@ class BaseScaffold extends StatelessWidget {
           );
 
     return Scaffold(
-      appBar: MyAppBar(title: appBarTitle),
+      appBar: MyAppBar(title: appBarTitle, showThemeToggle: showThemeToggle),
       body: right != null
           ? MultiSplitViewTheme(
               data: MultiSplitViewThemeData(

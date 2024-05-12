@@ -62,6 +62,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: const MyAppBar(
         titleWidget: Text(Constants.appName),
+        showThemeToggle: true,
       ),
       body: Center(
         child: Column(
