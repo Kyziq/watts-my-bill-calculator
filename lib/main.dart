@@ -5,19 +5,17 @@ import 'package:watts_my_bill/pages/calculate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_solidart/flutter_solidart.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:watts_my_bill/utils/constants.dart';
 
 void main() {
   runApp(const App());
 }
 
 // Maps the routes to the specific widget page.
-const String homeRoute = '/';
-const String calculateRoute = '/calculate';
-const String aboutRoute = '/about';
 final routes = <String, WidgetBuilder>{
-  homeRoute: (_) => const MainPage(),
-  calculateRoute: (_) => const CalculatePage(),
-  aboutRoute: (_) => const AboutPage()
+  Constants.homeRoute: (_) => const MainPage(),
+  Constants.calculateRoute: (_) => const CalculatePage(),
+  Constants.aboutRoute: (_) => const AboutPage()
 };
 
 class App extends StatelessWidget {
@@ -63,12 +61,23 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(
-        titleWidget: Text('Watt\'s My Bill'),
+        titleWidget: Text(Constants.appName),
       ),
       body: Center(
-        child: ShadButton(
-          onPressed: () => Navigator.pushNamed(context, calculateRoute),
-          text: const Text('Calculate'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ShadButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, Constants.calculateRoute),
+              text: const Text('Calculate'),
+            ),
+            ShadButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, Constants.aboutRoute),
+              text: const Text('About'),
+            ),
+          ],
         ),
       ),
     );

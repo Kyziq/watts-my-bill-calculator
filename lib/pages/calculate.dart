@@ -1,4 +1,5 @@
-import 'package:watts_my_bill/common/assets.dart';
+import 'package:watts_my_bill/utils/assets.dart';
+import 'package:watts_my_bill/utils/constants.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
 import 'package:watts_my_bill/models/bill_calculation.dart';
 import 'package:watts_my_bill/widgets/error_handling.dart';
@@ -45,7 +46,7 @@ class _CalculatePageState extends State<CalculatePage> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBarTitle: 'Watt\'s My Bill',
+      appBarTitle: Constants.appName,
       children: [
         _buildCalculationForm(context),
         const SizedBox(height: 20),
