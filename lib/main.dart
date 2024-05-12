@@ -1,3 +1,4 @@
+import 'package:toastification/toastification.dart';
 import 'package:watts_my_bill/common/app_bar.dart';
 import 'package:watts_my_bill/pages/about.dart';
 import 'package:watts_my_bill/pages/calculate.dart';
@@ -30,17 +31,19 @@ class App extends StatelessWidget {
       ],
       builder: (context) {
         final themeMode = context.observe<ThemeMode>();
-        return ShadApp(
-          debugShowCheckedModeBanner: false,
-          themeMode: themeMode,
-          routes: routes,
-          theme: ShadThemeData(
-            brightness: Brightness.light,
-            colorScheme: const ShadZincColorScheme.light(),
-          ),
-          darkTheme: ShadThemeData(
-            brightness: Brightness.dark,
-            colorScheme: const ShadZincColorScheme.dark(),
+        return ToastificationWrapper(
+          child: ShadApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: themeMode,
+            routes: routes,
+            theme: ShadThemeData(
+              brightness: Brightness.light,
+              colorScheme: const ShadZincColorScheme.light(),
+            ),
+            darkTheme: ShadThemeData(
+              brightness: Brightness.dark,
+              colorScheme: const ShadZincColorScheme.dark(),
+            ),
           ),
         );
       },
