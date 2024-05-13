@@ -65,18 +65,19 @@ class _MainPageState extends State<MainPage> {
         showThemeToggle: true,
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ShadButton(
               onPressed: () =>
                   Navigator.pushNamed(context, Constants.calculateRoute),
-              text: const Text('Calculate'),
+              text: const Text('Calculate Now'),
             ),
+            const SizedBox(width: 20),
             ShadButton(
               onPressed: () =>
                   Navigator.pushNamed(context, Constants.aboutRoute),
-              text: const Text('About'),
+              text: const Text('About Me'),
             ),
           ],
         ),
