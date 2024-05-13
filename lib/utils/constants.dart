@@ -10,4 +10,7 @@ abstract class Constants {
   // UI Constants
   static const double defaultPadding = 16.0;
   static const double defaultRadius = 12.0;
+
+  // Profile Page
+  static const String githubProfileUrl = 'https://github.com/Kyziq';
 }
