@@ -9,10 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shadcn_ui: ^0.4.5
+  shadcn_ui: ^0.4.6
   flutter_solidart: ^1.7.1
   awesome_flutter_extensions: ^1.2.0
-  multi_split_view: ^2.4.0
+  multi_split_view: ^3.1.0
   google_fonts: 6.2.1
   flutter_svg: ^2.0.10+1
   toastification: ^2.0.0
