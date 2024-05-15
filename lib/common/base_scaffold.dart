@@ -72,16 +72,14 @@ class BaseScaffold extends StatelessWidget {
                 child: MultiSplitView(
                   initialAreas: [
                     Area(
-                      minimalSize: size.width / 2,
+                      min: size.width / 2,
                       size: size.width * .7,
+                      builder: (context, area) => left,
                     ),
                     Area(
-                      minimalSize: size.width * .3,
+                      min: size.width * .3,
+                      builder: (context, area) => right,
                     ),
-                  ],
-                  children: [
-                    left,
-                    right,
                   ],
                 ),
               ),
