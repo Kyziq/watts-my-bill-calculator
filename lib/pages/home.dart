@@ -164,4 +164,11 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _unitsController.dispose();
+    _rebateController.dispose();
+    super.dispose();
+  }
 }
