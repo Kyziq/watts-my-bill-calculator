@@ -12,7 +12,7 @@ class TariffRate {
       : rateUnit = 'sen/kWh',
         unit = 'kWh';
 
-  String get range => end > 0 ? '$start - $end $unit' : '$start+ $unit';
+  String get range => end > 0 ? '$start - $end' : '$start';
 }
 
 class TariffRates {
