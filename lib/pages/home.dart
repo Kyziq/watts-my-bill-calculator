@@ -1,7 +1,7 @@
 import 'package:watts_my_bill/utils/assets.dart';
 import 'package:watts_my_bill/utils/constants.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
-import 'package:watts_my_bill/models/bill_calculation.dart';
+import 'package:watts_my_bill/utils/bill_calculation.dart';
 import 'package:watts_my_bill/widgets/error_handling.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -45,6 +45,25 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _showTariffDialog() {
+    showShadDialog(
+      context: context,
+      builder: (context) => ShadDialog(
+        title: const Text("TNB's Tariff A - Domestic Tariff Rates"),
+        description: const Text(
+          "\"Domestic Consumer\" means a consumer occupying a private dwelling, which is not used as a hotel, boarding house or used for the purpose of carrying out any form of business, trade, professional activities or services.",
+          style: TextStyle(fontSize: 12),
+        ),
+        actions: [
+          ShadButton(
+            text: const Text('Close'),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -69,10 +88,17 @@ class _HomePageState extends State<HomePage> {
         children: [
           const Text('Bill Calculator'),
           const SizedBox(width: 8),
-          SvgPicture.asset(
-            Assets.electricIcon,
-            height: 20,
-            width: 20,
+          ShadTooltip(
+            builder: (context) =>
+                const Text('Learn how your bill is calculated'),
+            child: GestureDetector(
+              onTap: _showTariffDialog,
+              child: SvgPicture.asset(
+                Assets.infoIcon,
+                height: 20,
+                width: 20,
+              ),
+            ),
           ),
         ],
       ),
