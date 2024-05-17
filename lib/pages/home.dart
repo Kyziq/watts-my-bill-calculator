@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class CalculatePage extends StatefulWidget {
-  const CalculatePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<CalculatePage> createState() => _CalculatePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _CalculatePageState extends State<CalculatePage> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController _unitsController = TextEditingController();
   final TextEditingController _rebateController = TextEditingController();
 
@@ -49,6 +49,7 @@ class _CalculatePageState extends State<CalculatePage> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       appBarTitle: Constants.appName,
+      showThemeToggle: true,
       children: [
         _buildCalculationForm(context),
         const SizedBox(height: 20),
@@ -76,7 +77,7 @@ class _CalculatePageState extends State<CalculatePage> {
         ],
       ),
       description: const Text(
-        'Lets calculate your electricity bill!',
+        'Find out how much your electricity costs',
       ),
       content: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),

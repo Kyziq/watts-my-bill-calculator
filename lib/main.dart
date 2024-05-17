@@ -1,11 +1,10 @@
 import 'package:toastification/toastification.dart';
-import 'package:watts_my_bill/common/app_bar.dart';
 import 'package:watts_my_bill/pages/about.dart';
-import 'package:watts_my_bill/pages/calculate.dart';
+import 'package:watts_my_bill/pages/home.dart';
+import 'package:watts_my_bill/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_solidart/flutter_solidart.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:watts_my_bill/utils/constants.dart';
 
 void main() {
   runApp(const App());
@@ -13,8 +12,7 @@ void main() {
 
 // Maps the routes to the specific widget page.
 final routes = <String, WidgetBuilder>{
-  Constants.homeRoute: (_) => const MainPage(),
-  Constants.calculateRoute: (_) => const CalculatePage(),
+  Constants.homeRoute: (_) => const HomePage(),
   Constants.aboutRoute: (_) => const AboutPage()
 };
 
@@ -46,47 +44,5 @@ class App extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MyAppBar(
-        titleWidget: Text(Constants.appName),
-        showThemeToggle: true,
-      ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ShadButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, Constants.calculateRoute),
-              text: const Text('Calculate Now'),
-            ),
-            const SizedBox(width: 20),
-            ShadButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, Constants.aboutRoute),
-              text: const Text('About Me'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
