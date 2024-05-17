@@ -1,7 +1,5 @@
 import 'package:toastification/toastification.dart';
-import 'package:watts_my_bill/pages/about.dart';
 import 'package:watts_my_bill/pages/home.dart';
-import 'package:watts_my_bill/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_solidart/flutter_solidart.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -9,12 +7,6 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 void main() {
   runApp(const App());
 }
-
-// Maps the routes to the specific widget page.
-final routes = <String, WidgetBuilder>{
-  Constants.homeRoute: (_) => const HomePage(),
-  Constants.aboutRoute: (_) => const AboutPage()
-};
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -31,7 +23,7 @@ class App extends StatelessWidget {
           child: ShadApp(
             debugShowCheckedModeBanner: false,
             themeMode: themeMode,
-            routes: routes,
+            home: const HomePage(),
             theme: ShadThemeData(
               brightness: Brightness.light,
               colorScheme: const ShadZincColorScheme.light(),
