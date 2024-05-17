@@ -1,3 +1,5 @@
+import 'package:watts_my_bill/models/tariff_rates.dart';
+
 class BillDetails {
   final double price;
   final double rebate;
@@ -8,16 +10,6 @@ class BillDetails {
 }
 
 class BillCalculation {
-  // Defined in sen per kWh for different blocks of usage
-  static const double _firstBlock =
-      21.8; // For the first 200 kWh (1 - 200 kWh) per month
-  static const double _secondBlock =
-      33.4; // For the next 100 kWh (201 - 300 kWh) per month
-  static const double _thirdBlock =
-      51.6; // For the next 300 kWh (301 - 600 kWh) per month
-  static const double _fourthBlock =
-      54.6; // For the next 300 kWh (601 - 900 kWh) per month onwards
-
   static BillDetails calculateBill(String unitsText, String rebateText) {
     if (unitsText.isEmpty) {
       throw const FormatException('Please enter the number of units used.');
@@ -44,25 +36,24 @@ class BillCalculation {
   static BillDetails _performCalculation(int unitsUsed, double rebatePercent) {
     double bill = 0.0;
 
-    // Calculation
-    if (unitsUsed > 600) {
-      bill += (unitsUsed - 600) * _fourthBlock;
-      unitsUsed = 600;
+    for (final TariffRate rate in TariffRates.rates) {
+      final int unitsInRange = _calculateUnitsInRange(unitsUsed, rate);
+      bill += unitsInRange * rate.rate;
+      unitsUsed -= unitsInRange;
+      if (unitsUsed <= 0) break; // Stop if all units are accounted for
     }
-    if (unitsUsed > 300) {
-      bill += (unitsUsed - 300) * _thirdBlock;
-      unitsUsed = 300;
-    }
-    if (unitsUsed > 200) {
-      bill += (unitsUsed - 200) * _secondBlock;
-      unitsUsed = 200;
-    }
-    bill += unitsUsed * _firstBlock;
 
     double price = bill / 100; // Convert sen to RM
     double rebate = price * rebatePercent;
     double netTotal = price - rebate;
 
     return BillDetails(price: price, rebate: rebate, netTotal: netTotal);
+  }
+
+  static int _calculateUnitsInRange(int unitsUsed, TariffRate rate) {
+    if (rate.end == -1) return unitsUsed; // No upper limit
+    final int rangeUnits =
+        rate.end - rate.start + 1; // Plus one because it's inclusive
+    return unitsUsed >= rangeUnits ? rangeUnits : unitsUsed;
   }
 }
