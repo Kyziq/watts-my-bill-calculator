@@ -42,16 +42,6 @@ class BillCalculation {
 
   /// Calculates the total electricity bill based on the units consumed and rebate percentage.
   static BillDetails _performCalculation(int unitsUsed, double rebatePercent) {
-    if (unitsUsed < 0) {
-      throw const FormatException('Units used must not be negative.');
-    }
-
-    // Validate rebate percentage is within the allowed range (0% to 5%)
-    if (rebatePercent < 0.0 || rebatePercent > 0.05) {
-      throw const FormatException(
-          'Rebate percentage must be between 0% and 5%.');
-    }
-
     double bill = 0.0;
 
     // Calculation
