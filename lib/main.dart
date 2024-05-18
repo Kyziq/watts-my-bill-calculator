@@ -5,6 +5,7 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:toastification/toastification.dart';
 import 'package:watts_my_bill/pages/home.dart';
 import 'package:watts_my_bill/pages/about.dart';
+import 'package:watts_my_bill/utils/assets.dart';
 
 void main() {
   runApp(const App());
@@ -77,13 +78,16 @@ class MainScreenState extends State<MainScreen> {
         onItemSelected: _onItemTapped,
         items: [
           FlashyTabBarItem(
-            icon: const Icon(Icons.calculate),
+            icon: Image.asset(
+              Assets.wattsMyBillLogo,
+              height: 30,
+            ),
             title: const Text('Calculation'),
             activeColor: theme.primary,
             inactiveColor: theme.primary.withOpacity(0.4),
           ),
           FlashyTabBarItem(
-            icon: const Icon(Icons.person),
+            icon: const Icon(Icons.person), // Change this icon
             title: const Text('About Me'),
             activeColor: theme.primary,
             inactiveColor: theme.primary.withOpacity(0.4),

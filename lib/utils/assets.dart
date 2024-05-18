@@ -8,4 +8,5 @@ abstract class Assets {
 
   // Images
   static const String myPicture = 'assets/images/my-picture.jpg';
+  static const String wattsMyBillLogo = 'assets/images/watts-my-bill-logo.png';
 }
