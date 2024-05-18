@@ -1,3 +1,4 @@
+import 'package:watts_my_bill/models/tariff_rates.dart';
 import 'package:watts_my_bill/utils/assets.dart';
 import 'package:watts_my_bill/utils/constants.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
@@ -53,6 +54,46 @@ class _HomePageState extends State<HomePage> {
         description: const Text(
           "\"Domestic Consumer\" means a consumer occupying a private dwelling, which is not used as a hotel, boarding house or used for the purpose of carrying out any form of business, trade, professional activities or services.",
           style: TextStyle(fontSize: 12),
+        ),
+        content: Column(
+          children: [
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 200,
+              height: 300,
+              child: ShadTable(
+                columnCount: 2,
+                rowCount: TariffRates.rates.length,
+                header: (context, column) {
+                  final rate = TariffRates.rates[column];
+                  final headings = [
+                    'Usage, ${rate.unit}',
+                    'Rate, ${rate.rateUnit}'
+                  ];
+                  return ShadTableCell.header(
+                    alignment: column == 1
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Text(
+                      headings[column],
+                    ),
+                  );
+                },
+                builder: (context, index) {
+                  final rowIndex = index.row % TariffRates.rates.length;
+                  final rate = TariffRates.rates[rowIndex];
+                  return ShadTableCell(
+                    alignment: index.column == 1
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Text(
+                      index.column == 0 ? rate.range : rate.rate.toString(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
         actions: [
           ShadButton(
