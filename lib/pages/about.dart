@@ -74,7 +74,7 @@ class ContactCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 4),
+          const SizedBox(height: 16),
           _buildTableRow('Name', 'Muhammad Khairul Haziq bin Mohamad Khairi'),
           const SizedBox(height: 8),
           _buildTableRow('Student Number', '2023164629'),
