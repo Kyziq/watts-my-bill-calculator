@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
 import 'package:watts_my_bill/utils/assets.dart';
@@ -34,16 +33,13 @@ class AboutPage extends StatelessWidget {
               children: [
                 const BuildProfilePicture(),
                 const SizedBox(height: 20),
-                // BuildProfileDetails(),
-                const BuildContactInfo(),
-                const SizedBox(height: 10),
-                BuildGitHubLink(onTap: _launchUrl),
+                ContactCard(onTap: _launchUrl),
               ],
             ),
           ),
         ),
         const Padding(
-          padding: EdgeInsets.only(bottom: 20), // Adds space at the bottom
+          padding: EdgeInsets.only(bottom: 20),
           child: BuildCopyrightNotice(),
         ),
       ],
@@ -63,54 +59,65 @@ class BuildProfilePicture extends StatelessWidget {
   }
 }
 
-class BuildContactInfo extends StatelessWidget {
-  const BuildContactInfo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = ShadTheme.of(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          Assets.mailIcon,
-          height: 20,
-          width: 20,
-          colorFilter:
-              ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
-        ),
-        const SizedBox(width: 8),
-        const Text('ihaziqkhairi@gmail.com'),
-      ],
-    );
-  }
-}
-
-class BuildGitHubLink extends StatelessWidget {
+class ContactCard extends StatelessWidget {
   final VoidCallback onTap;
 
-  const BuildGitHubLink({super.key, required this.onTap});
+  const ContactCard({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final theme = ShadTheme.of(context);
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return ShadCard(
+      width: 350,
+      padding: const EdgeInsets.all(16),
+      title: const Text('Contact Information', textAlign: TextAlign.center),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            Assets.githubIcon,
-            height: 20,
-            width: 20,
-            colorFilter:
-                ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
+          const SizedBox(height: 4),
+          _buildTableRow('Name', 'Muhammad Khairul Haziq bin Mohamad Khairi'),
+          const SizedBox(height: 8),
+          _buildTableRow('Student Number', '2023164629'),
+          const SizedBox(height: 8),
+          _buildTableRow('Group', 'RCDCS2515B'),
+          const SizedBox(height: 8),
+          _buildTableRow('Course', 'CS251'),
+          const SizedBox(height: 8),
+          _buildTableRow('Email', 'ihaziqkhairi@gmail.com'),
+          const SizedBox(height: 8),
+          GestureDetector(
+            onTap: onTap,
+            child: _buildTableRow(
+              'GitHub',
+              'Visit GitHub Repository',
+              underline: true,
+            ),
           ),
-          const SizedBox(width: 8),
-          const Text('Visit GitHub Repository',
-              style: TextStyle(decoration: TextDecoration.underline)),
         ],
       ),
+    );
+  }
+
+  Widget _buildTableRow(String label, String value, {bool underline = false}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 2,
+          child:
+              Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        const SizedBox(width: 16), // Blank column
+        Expanded(
+          flex: 3,
+          child: Text(
+            value,
+            style: underline
+                ? const TextStyle(decoration: TextDecoration.underline)
+                : null,
+          ),
+        ),
+      ],
     );
   }
 }
