@@ -119,8 +119,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCalculationForm(BuildContext context) {
-    // TODO: Make use of ShadTheme
-    // final theme = ShadTheme.of(context);
+    final theme = ShadTheme.of(context);
 
     return ShadCard(
       width: 350,
@@ -138,6 +137,8 @@ class _HomePageState extends State<HomePage> {
                 Assets.infoIcon,
                 height: 20,
                 width: 20,
+                colorFilter: ColorFilter.mode(
+                    theme.colorScheme.primary, BlendMode.srcIn),
               ),
             ),
           ),

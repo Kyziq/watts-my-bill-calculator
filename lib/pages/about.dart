@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:watts_my_bill/common/base_scaffold.dart';
 import 'package:watts_my_bill/utils/assets.dart';
 import 'package:watts_my_bill/utils/constants.dart';
@@ -67,6 +68,7 @@ class BuildContactInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -74,6 +76,8 @@ class BuildContactInfo extends StatelessWidget {
           Assets.emailIcon,
           height: 20,
           width: 20,
+          colorFilter:
+              ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
         ),
         const SizedBox(width: 8),
         const Text('ihaziqkhairi@gmail.com'),
@@ -89,6 +93,7 @@ class BuildGitHubLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Row(
@@ -98,6 +103,8 @@ class BuildGitHubLink extends StatelessWidget {
             Assets.githubIcon,
             height: 20,
             width: 20,
+            colorFilter:
+                ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
           ),
           const SizedBox(width: 8),
           const Text('Visit GitHub Repository',
@@ -117,7 +124,6 @@ class BuildCopyrightNotice extends StatelessWidget {
       'Copyright © 2024 Haziq Khairi. All rights reserved.',
       textAlign: TextAlign.center,
       style: TextStyle(
-        color: Colors.black87,
         fontSize: 12,
       ),
     );
