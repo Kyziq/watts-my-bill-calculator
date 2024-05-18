@@ -1,6 +1,7 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_solidart/flutter_solidart.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:toastification/toastification.dart';
 import 'package:watts_my_bill/pages/home.dart';
@@ -65,12 +66,11 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ShadColorScheme theme = ShadTheme.of(context).colorScheme;
-    // final theme = ShadTheme.of(context).colorScheme;
+    final theme = ShadTheme.of(context);
     return Scaffold(
       body: _tabItems[_selectedIndex],
       bottomNavigationBar: FlashyTabBar(
-        backgroundColor: theme.popover,
+        backgroundColor: theme.colorScheme.popover,
         animationCurve: Curves.linear,
         selectedIndex: _selectedIndex,
         iconSize: 30,
@@ -83,14 +83,20 @@ class MainScreenState extends State<MainScreen> {
               height: 30,
             ),
             title: const Text('Calculation'),
-            activeColor: theme.primary,
-            inactiveColor: theme.primary.withOpacity(0.4),
+            activeColor: theme.colorScheme.primary,
+            inactiveColor: theme.colorScheme.primary.withOpacity(0.4),
           ),
           FlashyTabBarItem(
-            icon: const Icon(Icons.person), // Change this icon
+            icon: SvgPicture.asset(
+              Assets.personIcon,
+              height: 20,
+              width: 20,
+              colorFilter:
+                  ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
+            ),
             title: const Text('About Me'),
-            activeColor: theme.primary,
-            inactiveColor: theme.primary.withOpacity(0.4),
+            activeColor: theme.colorScheme.primary,
+            inactiveColor: theme.colorScheme.primary.withOpacity(0.4),
           ),
         ],
       ),

@@ -73,7 +73,7 @@ class BuildContactInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          Assets.emailIcon,
+          Assets.mailIcon,
           height: 20,
           width: 20,
           colorFilter:

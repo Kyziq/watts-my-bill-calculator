@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
             child: GestureDetector(
               onTap: _showTariffDialog,
               child: SvgPicture.asset(
-                Assets.infoIcon,
+                Assets.infoCircleIcon,
                 height: 20,
                 width: 20,
                 colorFilter: ColorFilter.mode(
