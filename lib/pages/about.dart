@@ -19,10 +19,11 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBarTitle: 'About Me',
+      appBarTitle: 'Watt\'s My Bill',
       wrapChildrenInScrollable:
           false, // Now handled individually within children
       wrapSingleChildInColumn: false,
+      showThemeToggle: true,
       children: [
         Expanded(
           // This will take all available space pushing the copyright to bottom
