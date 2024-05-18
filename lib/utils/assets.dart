@@ -3,7 +3,6 @@ abstract class Assets {
   static const String electricIcon = 'assets/icons/electric-icon.svg';
   static const String infoIcon = 'assets/icons/info-icon.svg';
   static const String githubIcon = 'assets/icons/github-icon.svg';
-  static const String githubWhiteIcon = 'assets/icons/github-white-icon.svg';
   static const String emailIcon = 'assets/icons/email-icon.svg';
 
   // Images
