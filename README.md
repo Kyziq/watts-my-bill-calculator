@@ -13,15 +13,16 @@
     A simple Flutter app to calculate your electricity bill based on TNB's domestic tariff rates.
     <br />
     <br />
-    <a href="https://github.com/Kyziq/watts-my-bill-calculator">View Demo</a>
-    ·
     <a href="https://github.com/Kyziq/watts-my-bill-calculator/issues">Report Bug</a>
     ·
     <a href="https://github.com/Kyziq/watts-my-bill-calculator/issues">Request Feature</a>
   </p>
 </div>
 
-
+<!-- DEMO GIF -->
+<div align="center">
+  <img src="assets/images/full-demo-overview-19052024.gif" alt="Demo Overview GIF" width="300">
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -53,10 +54,10 @@
 
 ### Features
 
-* **Calculate electricity bill:** Enter your electricity consumption in kilowatt-hours (kWh) and any applicable rebate percentage.
-* **View TNB tariff rates:**  Access detailed information about TNB's domestic tariff rates (as of May 2024) to understand how your bill is calculated.
-* **Customizable:** Adjust the app's appearance with different themes.
-* **Error handling:**  Provides clear error messages for invalid inputs.
+- **Calculate electricity bill:** Enter your electricity consumption in kilowatt-hours (kWh) and any applicable rebate percentage.
+- **View TNB tariff rates:** Access detailed information about TNB's domestic tariff rates (as of May 2024) to understand how your bill is calculated.
+- **Customizable:** Adjust the app's appearance with different themes.
+- **Error handling:** Provides clear error messages for invalid inputs.
 
 ### Built With
 
@@ -64,36 +65,41 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To run this app on your local machine, follow these steps:
 
 ### Prerequisites
 
-* **Flutter SDK:** Make sure you have the Flutter SDK installed. You can download it from the official Flutter website: [https://flutter.dev/](https://flutter.dev/)
+- **Flutter SDK:** Make sure you have the Flutter SDK installed. You can download it from the official Flutter website: [https://flutter.dev/](https://flutter.dev/)
 
 ### Installation
 
 1. **Clone the repo:**
+
    ```sh
    git clone https://github.com/Kyziq/watts-my-bill-calculator
 
+   ```
+
 2. **Install dependencies:**
+
    ```sh
    flutter pub get
+
+   ```
 
 3. **Run the code:**
    ```sh
    flutter run
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 Estimate your electricity bill with ease:
@@ -106,6 +112,7 @@ Estimate your electricity bill with ease:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -121,19 +128,17 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [product-screenshot]: images/screenshot.png
 [Flutter]: https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white
 [Flutter-url]: https://flutter.dev/
