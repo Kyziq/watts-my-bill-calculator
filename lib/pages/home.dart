@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
       showThemeToggle: true,
       children: [
         _buildCalculationForm(context),
-        const SizedBox(height: 20),
+        const SizedBox(height: 8),
         _buildResultCard(),
       ],
     );
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
     final theme = ShadTheme.of(context);
 
     return ShadCard(
-      width: 350,
+      width: 380,
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
